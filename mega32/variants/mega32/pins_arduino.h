@@ -1,6 +1,6 @@
 /*
     Author:		Eric Conner
-	Email:		Eric@EricConnerApps.com
+    Email:		Eric@EricConnerApps.com
     Date:		06-10-2013
     Project:	ATmega32 for Arduino IDE
     Version:	v1.2
@@ -11,7 +11,14 @@
 
 #include <avr/pgmspace.h>
 
-#ifdef ARDUINO_MAIN
+#define TIMER0A 1
+#define TIMER0B 2
+#define TIMER1A 3
+#define TIMER1B 4
+#define TIMER2  5
+
+#define NOT_A_PORT 0
+#define NOT_ON_TIMER 0
 
 #define PA 1
 #define PB 2
@@ -22,14 +29,14 @@
                         ATMEL ATmega32
 					   
                           +---\\---+
- 	   (XCK/T0) D0 PB0	01|        |40  PA0 AI7 D31 (ADC0)
- 	       (T1) D1 PB1	02|        |39  PA1 AI6 D30 (ADC1)
- 	(INT2/AIN0) D2 PB2	03|        |38  PA2 AI5 D29 (ADC2)
- 	 (OC0/AIN1) D3 PB3	04|        |37  PA3 AI4 D28 (ADC3)
-	       (SS) D4 PB4	05|        |36  PA4 AI3 D27 (ADC4)
-	     (MOSI) D5 PB5	06|        |35  PA5 AI2 D26 (ADC5)
-	     (MISO) D6 PB6	07|        |34  PA6 AI1 D25 (ADC6)
-	      (SCK) D7 PB7	08|        |33  PA7 AI0 D24 (ADC7)
+    (XCK/T0) D0 PB0	01|        |40  PA0 AI7 D31 (ADC0)
+        (T1) D1 PB1	02|        |39  PA1 AI6 D30 (ADC1)
+ (INT2/AIN0) D2 PB2	03|        |38  PA2 AI5 D29 (ADC2)
+  (OC0/AIN1) D3 PB3	04|        |37  PA3 AI4 D28 (ADC3)
+       (SS) D4 PB4	05|        |36  PA4 AI3 D27 (ADC4)
+     (MOSI) D5 PB5	06|        |35  PA5 AI2 D26 (ADC5)
+     (MISO) D6 PB6	07|        |34  PA6 AI1 D25 (ADC6)
+      (SCK) D7 PB7	08|        |33  PA7 AI0 D24 (ADC7)
                  RESET	09|        |32  AREF
                    VCC	10|        |31  GND
                    GND	11|        |30  AVCC
@@ -45,28 +52,44 @@
                           +--------+
 */
 
-const uint16_t PROGMEM port_to_mode_PGM[5] = {
+static const uint8_t SDA = 8;
+static const uint8_t SCL = 9;
+
+static const uint8_t SS   = 4;
+static const uint8_t MOSI = 5;
+static const uint8_t MISO = 6;
+static const uint8_t SCK  = 7;
+
+#ifdef ARDUINO_MAIN
+
+const uint16_t PROGMEM port_to_mode_PGM[] = {
 	NOT_A_PORT,
 	(uint16_t) &DDRA,
 	(uint16_t) &DDRB,
 	(uint16_t) &DDRC,
 	(uint16_t) &DDRD,
+	NOT_A_PORT,
+	NOT_A_PORT,
 };
 
-const uint16_t PROGMEM port_to_output_PGM[5] = {
+const uint16_t PROGMEM port_to_output_PGM[] = {
 	NOT_A_PORT,
 	(uint16_t) &PORTA,
 	(uint16_t) &PORTB,
 	(uint16_t) &PORTC,
 	(uint16_t) &PORTD,
+	NOT_A_PORT,
+	NOT_A_PORT,
 };
 
-const uint16_t PROGMEM port_to_input_PGM[5] = {
-	NOT_A_PIN,
+const uint16_t PROGMEM port_to_input_PGM[] = {
+	NOT_A_PORT,
 	(uint16_t) &PINA,
 	(uint16_t) &PINB,
 	(uint16_t) &PINC,
 	(uint16_t) &PIND,
+	NOT_A_PORT,
+	NOT_A_PORT,
 };
 
 const uint8_t PROGMEM digital_pin_to_port_PGM[32] = {
@@ -143,7 +166,7 @@ const uint8_t PROGMEM digital_pin_to_timer_PGM[32] = {
 	NOT_ON_TIMER,  // PB0 ** D0
 	NOT_ON_TIMER,  // PB1 ** D1
 	NOT_ON_TIMER,  // PB2 ** D2
-	TIMER0A,	   // PB3 ** D3
+	TIMER0A,       // PB3 ** D3
 	NOT_ON_TIMER,  // PB4 ** D4
 	NOT_ON_TIMER,  // PB5 ** D5
 	NOT_ON_TIMER,  // PB6 ** D6
@@ -152,10 +175,10 @@ const uint8_t PROGMEM digital_pin_to_timer_PGM[32] = {
 	NOT_ON_TIMER,  // PD1 ** D9
 	NOT_ON_TIMER,  // PD2 ** D10
 	NOT_ON_TIMER,  // PD3 ** D11
-	TIMER1B,	   // PD4 ** D12
-	TIMER1A,	   // PD5 ** D13
+	TIMER1B,       // PD4 ** D12
+	TIMER1A,       // PD5 ** D13
 	NOT_ON_TIMER,  // PD6 ** D14
-	TIMER2,		   // PD7 ** D15
+	TIMER2,	       // PD7 ** D15
 	NOT_ON_TIMER,  // PC0 ** D16
 	NOT_ON_TIMER,  // PC1 ** D17
 	NOT_ON_TIMER,  // PC2 ** D18
