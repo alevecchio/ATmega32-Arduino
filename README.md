@@ -1,7 +1,7 @@
 ATmega32-Arduino
 ================
 
-ATmega32 for Arduino IDE v1.1
+ATmega32 for Arduino IDE v1.0.5
 
 ********************************
  Installing ATmega32
