@@ -1,8 +1,11 @@
+##############################################################
+
 #	Author:		Alex Vecchio
 #	Email:		alevecchio @ hotmail.com
-#	Date:		02-jul-2014
 #	Project:	ATmega32 for Arduino IDE
-#	Version:	v1.0
+#	File:		boards.txt
+#	Date:		03-jul-2014
+#	Version:	v1.1
 
 ##############################################################
 
@@ -14,48 +17,60 @@ atmega32.build.core=arduino:arduino
 atmega32.build.board=ATmega32
 atmega32.build.mcu=atmega32
 atmega32.build.variant=mega32
+
 atmega32.upload.maximum_size=32256
 atmega32.upload.tool=arduino:avrdude
 atmega32.upload.protocol=arduino
+atmega32.upload.speed=115200
+
+atmega32.program.tool=arduino:avrdude
+atmega32.program.maximum_size=32256
+atmega32.program.protocol=arduino
+
 
 atmega32.bootloader.tool=arduino:avrdude
-#atmega32.bootloader.unlock_bits=0xff
-#atmega32.bootloader.lock_bits=0xff
+atmega32.bootloader.unlock_bits=0xff
+atmega32.bootloader.lock_bits=0xff
+atmega32.bootloader.speed=04
 
 ##############################################################
 
-atmega32.menu.clock.internal1=1 MHz (Internal)
-atmega32.menu.clock.internal1.build.f_cpu=1000000L
-atmega32.menu.clock.internal1.bootloader.low_fuses=0xE1
-atmega32.menu.clock.internal1.bootloader.high_fuses=0xdf
+#atmega32.menu.clock.internal1=1 MHz (Internal)
+#atmega32.menu.clock.internal1.build.f_cpu=1000000L
+#atmega32.menu.clock.internal1.bootloader.low_fuses=0xE1
+#atmega32.menu.clock.internal1.bootloader.high_fuses=0xCF
+#atmega32.menu.clock.internal1.speed=04
 
 ##############################################################
 
 atmega32.menu.clock.internal2=2 MHz (Internal)
 atmega32.menu.clock.internal2.build.f_cpu=2000000L
 atmega32.menu.clock.internal2.bootloader.low_fuses=0xE2
-atmega32.menu.clock.internal2.bootloader.high_fuses=0xdf
+atmega32.menu.clock.internal2.bootloader.high_fuses=0xCF
+atmega32.menu.clock.internal2.speed=04
 
 ##############################################################
 
 atmega32.menu.clock.internal4=4 MHz (Internal)
 atmega32.menu.clock.internal4.build.f_cpu=4000000L
 atmega32.menu.clock.internal4.bootloader.low_fuses=0xE3
-atmega32.menu.clock.internal4.bootloader.high_fuses=0xdf
+atmega32.menu.clock.internal4.bootloader.high_fuses=0xCF
+atmega32.menu.clock.internal4.speed=02
 
 ##############################################################
 
 atmega32.menu.clock.internal8=8 MHz (Internal)
 atmega32.menu.clock.internal8.build.f_cpu=8000000L
 atmega32.menu.clock.internal8.bootloader.low_fuses=0xE4
-atmega32.menu.clock.internal8.bootloader.high_fuses=0xdf
+atmega32.menu.clock.internal8.bootloader.high_fuses=0xCF
+atmega32.menu.clock.internal8.speed=01
 
 ##############################################################
 
 atmega32.menu.clock.internal16=16 MHz (External)
-atmega32.menu.clock.internal16.upload.speed=115200
 atmega32.menu.clock.internal16.build.f_cpu=16000000L
-atmega32.menu.clock.internal16.bootloader.low_fuses=0xff
-atmega32.menu.clock.internal16.bootloader.high_fuses=0xdf
+atmega32.menu.clock.internal16.bootloader.low_fuses=0xFF
+atmega32.menu.clock.internal16.bootloader.high_fuses=0xDF
+atmega32.menu.clock.internal16.speed=01
 
 ##############################################################

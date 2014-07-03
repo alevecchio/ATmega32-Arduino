@@ -4,13 +4,19 @@ ATmega32-Arduino
 ATmega32 tested on Arduino IDE v1.5.5
 
 ********************************
- Installing ATmega32
+ Attention
+********************************
+Before burn your sketch on the ATmega32, burn the BOOTLOADER. This will only set the right fuses to use different clock configs  
+There is no Bootloader on this version. I am using an USBASP to program the sketches directly to the Mega32.
+
+********************************
+ "Installing" ATmega32 on Arduino
 ********************************
 0. Close the Arduino IDE (all instances).
 1. Copy the mega32 folder to the Sketchbook \hardware folder. If one does not exist create it.
 2. Start the Arduino IDE.
 3. Select ATmega32 as your Board
-4. Select Clock 1MHz (Internal), 2MHz (Internal), 4MHz (Internal) or 8MHz (Internal) or 16MHz (External Cristal) from the Tools->Clock menu.
+4. Select Clock 2MHz (Internal), 4MHz (Internal) or 8MHz (Internal) or 16MHz (External Cristal) from the Tools->Clock menu.
 5. Now, you can compile any standard project.
 
 ********************************
@@ -44,4 +50,9 @@ Fuse Calculator
 ********************************
 http://eleccelerator.com/fusecalc/fusecalc.php?chip=atmega32&LOW=FF&HIGH=DF&LOCKBIT=FF
 
-OBS: No Bootloader on this version. I am using an USBASP to burn the programs to the Mega32.
+
+********************************
+2 Do
+********************************
+Discover how to override the avrdude call in the platform.txt. I tried but it's not working.
+https://github.com/arduino/Arduino/wiki/Arduino-IDE-1.5---3rd-party-Hardware-specification 
