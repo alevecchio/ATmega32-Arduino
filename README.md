@@ -1,16 +1,17 @@
 ATmega32-Arduino
 ================
 
-ATmega32 for Arduino IDE v1.0.5
+ATmega32 tested on Arduino IDE v1.5.5
 
 ********************************
  Installing ATmega32
 ********************************
 0. Close the Arduino IDE (all instances).
-1. Copy the Mega32 folder to the Sketchbook \hardware folder. If one does not exist create it.
+1. Copy the mega32 folder to the Sketchbook \hardware folder. If one does not exist create it.
 2. Start the Arduino IDE.
-3. Select any ATmega32-1mhz or ATmega32-8mhz board from the Tools->Board menu.
-6. Now, you can compile any standard project.
+3. Select ATmega32 as your Board
+4. Select Clock 1MHz (Internal), 2MHz (Internal), 4MHz (Internal) or 8MHz (Internal) or 16MHz (External Cristal) from the Tools->Clock menu.
+5. Now, you can compile any standard project.
 
 ********************************
 Pin Numbers
@@ -37,3 +38,10 @@ Pin Numbers
         (OC1A) D13 PD5  19|        |22  PC0 D16 (SCL)
         (ICP1) D14 PD6  20|        |21  PD7 D15 (OC2)
                           +--------+
+
+********************************
+Fuse Calculator
+********************************
+http://eleccelerator.com/fusecalc/fusecalc.php?chip=atmega32&LOW=FF&HIGH=DF&LOCKBIT=FF
+
+OBS: No Bootloader on this version. I am using an USBASP to burn the programs to the Mega32.
